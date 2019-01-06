@@ -15,13 +15,48 @@
 # dvszwmarrgswjxmb is naughty because it contains only one vowel.
 # How many strings are nice?
 
-stringsList = []
+def vowelCount(string):
+    vowelCounter = 0
+    vowels = ["a","e","i","o","u"]
+    for characters in string:
+        if characters in vowels:
+            vowelCounter += 1
+            if vowelCounter == 3:
+                return True
+    return False
+
+def doubleCharacterChecker(string):
+    lastCheckedLetter = ''
+    for character in string:
+        if character == lastCheckedLetter:
+            return True
+        else:
+            lastCheckedLetter = character
+    return False
+
+def naughtyStringEvaluator(string):
+    naughtyStrings = ["ab", "cd", "pq", "xy"]
+    for naughtyString in naughtyStrings:
+        if naughtyString in string:
+            return True
+    return False
+
+
 
 def main():
-
+    niceCount = 0
     with open('day-5-naughty-strings.txt', 'r') as f:
         stringsList = f.read().splitlines()
-        print(stringsList)
+        for string in stringsList:
+            if vowelCount(string) == True:
+                if doubleCharacterChecker(string) == True:
+                    if naughtyStringEvaluator(string) == False:
+                        niceCount += 1
+    print(niceCount)    
+
+
+
+
 
 if __name__ == "__main__":
     main()
